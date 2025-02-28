@@ -21,14 +21,14 @@
 
 # ---------------------------------------------------
 
-# services:
+ services:
 
 # # USE LIBRECHAT CONFIG FILE
-#   api:
-#     volumes:
-#     - type: bind
-#       source: ./librechat.yaml
-#       target: /app/librechat.yaml
+   api:
+     volumes:
+     - type: bind
+       source: ./librechat.yaml
+       target: /app/librechat.yaml
 
 # # LOCAL BUILD
 #   api:
@@ -42,30 +42,30 @@
 #     image: ghcr.io/danny-avila/librechat-dev:latest
  
 # # BUILD FROM LATEST IMAGE (NUMBERED RELEASE)
-#   api:
-#     image: ghcr.io/danny-avila/librechat:latest
+   api:
+     image: ghcr.io/danny-avila/librechat:latest
 
 # # BUILD FROM LATEST API IMAGE
 #   api:
 #     image: ghcr.io/danny-avila/librechat-dev-api:latest
 
 # # BUILD FROM LATEST API IMAGE (NUMBERED RELEASE)
-#   api:
-#     image: ghcr.io/danny-avila/librechat-api:latest
+   api:
+     image: ghcr.io/danny-avila/librechat-api:latest
 
 # # ADD MONGO-EXPRESS
 #   mongo-express:
-#     image: mongo-express
-#     container_name: mongo-express
-#     environment:
-#       ME_CONFIG_MONGODB_SERVER: mongodb
-#       ME_CONFIG_BASICAUTH_USERNAME: admin
-#       ME_CONFIG_BASICAUTH_PASSWORD: password
-#     ports:
-#       - '8081:8081'
-#     depends_on:
-#       - mongodb
-#     restart: always
+     image: mongo-express
+     container_name: mongo-express
+     environment:
+       ME_CONFIG_MONGODB_SERVER: mongodb
+       ME_CONFIG_BASICAUTH_USERNAME: admin
+       ME_CONFIG_BASICAUTH_PASSWORD: password
+     ports:
+       - '8081:8081'
+     depends_on:
+       - mongodb
+     restart: always
 
 # # USE MONGODB V4.4.18 - FOR OLDER CPU WITHOUT AVX SUPPORT
 #   mongodb:
@@ -91,16 +91,16 @@
 #       - donotstart
 
 # # EXPOSE MEILISEARCH PORTS - DO NOT USE THE DEFAULT VALUE FOR THE MASTER KEY IF YOU DO THIS
-#   meilisearch:
-#     ports:
-#       - 7700:7700
+   meilisearch:
+     ports:
+       - 7700:7700
 
 # # USE RAG API IMAGE WITH LOCAL EMBEDDINGS SUPPORT
-#  rag_api:
-#    image: ghcr.io/danny-avila/librechat-rag-api-dev:latest
+  rag_api:
+    image: ghcr.io/danny-avila/librechat-rag-api-dev:latest
 # # For Linux user: 
-#    extra_hosts:
-#      - "host.docker.internal:host-gateway"
+    extra_hosts:
+     - "host.docker.internal:host-gateway"
 
 # # ADD OLLAMA
 #  ollama:
@@ -148,27 +148,27 @@
 #    - ./redis:/data
   
 # # ADD LITELLM MONITORING
-#  langfuse-server:
-#    image: ghcr.io/langfuse/langfuse:latest
-#    depends_on:
-#      - db
-#    ports:
-#      - "3000:3000"
-#    environment:
-#      - NODE_ENV=production
-#      - DATABASE_URL=postgresql://postgres:PostgresChangeMe@db:5432/postgres
-#      - NEXTAUTH_SECRET=ChangeMe
-#      - SALT=ChangeMe
-#      - NEXTAUTH_URL=http://localhost:3000
-#      - TELEMETRY_ENABLED=${TELEMETRY_ENABLED:-true}
-#      - NEXT_PUBLIC_SIGN_UP_DISABLED=${NEXT_PUBLIC_SIGN_UP_DISABLED:-false}
-#      - LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES=${LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES:-false}
-#  db:
-#    image: postgres
-#    restart: always
-#    environment:
-#      - POSTGRES_USER=postgres
-#      - POSTGRES_PASSWORD=PostgresChangeMe
-#      - POSTGRES_DB=postgres
-#    volumes:
-#      - ./postgres:/var/lib/postgresql/data
+  langfuse-server:
+    image: ghcr.io/langfuse/langfuse:latest
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://postgres:PostgresChangeMe@db:5432/postgres
+      - NEXTAUTH_SECRET=ChangeMe
+      - SALT=ChangeMe
+      - NEXTAUTH_URL=http://localhost:3000
+      - TELEMETRY_ENABLED=${TELEMETRY_ENABLED:-true}
+      - NEXT_PUBLIC_SIGN_UP_DISABLED=${NEXT_PUBLIC_SIGN_UP_DISABLED:-false}
+      - LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES=${LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES:-false}
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=PostgresChangeMe
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
